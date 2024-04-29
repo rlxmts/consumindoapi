@@ -29,6 +29,7 @@ async function buscaApi(){
                     <img class="img-canal" src="${video.imagem} alt="Logo do Canal">
                     <h3 class="titulo-video">${video.titulo}</h3>
                     <p class="titulo-canal">${video.descricao}</p>
+                    <p class="categoria-video" hidden>${video.categoria}</p>
             </div>
           </li>`  
         })
@@ -62,4 +63,39 @@ function filtrarVideos(){
         }
     })
 
+}
+
+const btCategoria = document.querySelectorAll('.superior__item');
+
+// for(i = 0; i < btCategoria.length; i++){
+
+//     const categoriaClicada = btCategoria[i];    
+//     categoriaClicada.onclick = ()=> {
+//         let categoria = categoriaClicada.getAttribute('name');
+//         filtrarCategoria(categoria);
+//     }
+// }
+
+btCategoria.forEach( botao => {
+    const categoria = botao.getAttribute('name');
+    botao.addEventListener('click', ()=> filtrarCategoria(categoria));
+})
+
+function filtrarCategoria(valor){
+    const videos = document.querySelectorAll('.videos__item');
+
+    videos.forEach( video => {
+        let categoriaVideo = video.querySelector('.categoria-video').textContent;
+
+        if(valor == 'Tudo'){
+            video.style.display = 'block';            
+        }else{
+            if(valor != categoriaVideo){
+                video.style.display = 'none';
+            }else{
+                video.style.display = 'block';
+            }
+
+        }
+    })
 }
